@@ -44,7 +44,7 @@ fun main() {
 }
 ```
 
-Por último, hay cientos de paginas que te pueden ayudar. Un ejemplo de una de ella es: [https://regex101.com/](https://regex101.com/)
+Por último, hay cientos de paginas que te pueden ayudar. Un ejemplo de una de ella es: [https://regex101.com/](https://regex101.com/). No olvides configurarla para que soporte las expresiones regulares al estilo `java`. 
 
 
 ### Ejercicios propuestos
