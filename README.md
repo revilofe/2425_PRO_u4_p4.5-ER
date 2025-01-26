@@ -1,8 +1,101 @@
-# Práctica 4.4: Programación orientada a objetos III
+# Práctica 4.5: EXPRESIONES REGULARES
 
 Apóyate en los siguientes recursos para realizar la práctica:
 
-[U4: 4. POO III](https://revilofe.github.io/section1/u04/practica/PROG-U4.-Practica004/) y puedes ampliarlo con [U4: 5. POO IV](https://revilofe.github.io/section1/u04/practica/PROG-U4.-Practica005/)
+### Resumen práctico sobre expresiones regulares en Kotlin
+
+Las expresiones regulares (regex) son patrones utilizados para buscar o manipular cadenas de texto. Kotlin hereda las capacidades de regex de Java, ofreciendo una API rica y funcional. Aquí tienes los elementos clave y cómo utilizarlos en Kotlin:
+
+#### 1. **Creación de patrones**
+```kotlin
+val regex = Regex("patrón")
+val match = regex.containsMatchIn("texto a analizar")
+```
+
+#### 2. **Métodos comunes**
+- **`matches`**: Comprueba si una cadena coincide completamente con el patrón.
+- **`find`**: Busca la primera coincidencia.
+- **`findAll`**: Encuentra todas las coincidencias.
+- **`replace`**: Reemplaza las coincidencias.
+- **`split`**: Divide una cadena en partes basándose en el patrón.
+
+#### 3. **Elementos principales de un patrón**
+- **Letras y números**: Coinciden literalmente (`a`, `1`).
+- **Metacaracteres**:
+  - `.`: Cualquier carácter.
+  - `\d`: Un dígito.
+  - `\w`: Un carácter alfanumérico.
+  - `\s`: Un espacio.
+- **Cuantificadores**:
+  - `*`: 0 o más.
+  - `+`: 1 o más.
+  - `?`: 0 o 1.
+  - `{n,m}`: Entre `n` y `m` repeticiones.
+- **Grupos y capturas**:
+  - `(abc)`: Grupo capturable.
+  - `(?:abc)`: Grupo no capturable.
+
+#### 4. **Ejemplo básico**
+```kotlin
+fun main() {
+    val regex = Regex("\\d{3}-\\d{2}-\\d{4}") // Formato: 123-45-6789
+    val input = "Mi número es 123-45-6789."
+    println(regex.containsMatchIn(input)) // true
+}
+```
+
+
+### Ejercicios propuestos
+
+#### 1. **Validar un correo electrónico**
+Escribe un programa que determine si una cadena tiene el formato correcto de un correo electrónico. Recuerda que un correo tiene las siguientes partes:
+1. **Usuario**: Puede contener letras, números, puntos (`.`), guiones (`-`) y signos de suma (`+`).
+2. **Dominio**: Está compuesto por letras, números, y puede incluir puntos para subdominios.
+3. **Extensión**: Siempre comienza con un punto (`.`) seguido de dos o más letras.
+
+Pista:
+- Usa `^[...]` para asegurar que el patrón comience desde el principio.
+- Los caracteres alfanuméricos y especiales para el usuario pueden representarse con un conjunto.
+- No olvides el carácter `@` para separar usuario y dominio.
+
+---
+
+#### 2. **Buscar números en un texto**
+En este ejercicio, deberás extraer todos los números que aparezcan en un texto dado. Por ejemplo, de "Hay 3 gatos y 15 perros", deberías obtener `[3, 15]`.
+
+Pista:
+- Utiliza `\\d+` para encontrar uno o más dígitos consecutivos.
+- Usa `Regex.findAll` para obtener todas las coincidencias en lugar de detenerte en la primera.
+
+---
+
+#### 3. **Reemplazar palabras prohibidas**
+Crea un programa que reemplace una palabra específica como "mala" por "***". Asegúrate de que solo se reemplacen coincidencias exactas de la palabra, no partes de otras palabras (por ejemplo, "malabar" no debe ser reemplazada).
+
+Pista:
+- Usa `\\b` para indicar límites de palabra al inicio y al final del patrón.
+- La opción `RegexOption.IGNORE_CASE` te permitirá hacer que la búsqueda sea insensible a mayúsculas y minúsculas.
+
+---
+
+#### 4. **Dividir un texto por comas o puntos**
+Escribe un programa que divida un texto en partes utilizando comas (`,`) o puntos (`.`) como delimitadores. Por ejemplo, el texto `"Kotlin, es genial. Aprender, a programar."` debería dividirse en `["Kotlin", "es genial", "Aprender", "a programar"]`.
+
+Pista:
+- Usa un conjunto de caracteres para indicar que tanto la coma como el punto son válidos delimitadores (`[,.]`).
+- Recuerda que puedes usar `.split(regex)` para dividir la cadena en Kotlin.
+
+---
+
+#### 5. **Extraer fechas en formato `dd/mm/yyyy`**
+En este ejercicio, deberás encontrar todas las fechas en un texto con el formato `dd/mm/yyyy` y convertirlas al formato ISO `yyyy-mm-dd`. Por ejemplo, de `"Hoy es 25/01/2025 y mañana será 26/01/2025"`, obtendrás `["2025-01-25", "2025-01-26"]`.
+
+Pista:
+- Utiliza grupos de captura para dividir las partes del patrón: `(\\d{2})` para el día y el mes, y `(\\d{4})` para el año.
+- Después de encontrar las coincidencias, manipula los grupos capturados para reorganizar el formato.
+
+
+---
 
 > ATENCIÓN: DURANTE LA DOCUMENTACIÓN DE LA PRÁCTICA, ELIMINA TODO AQUELLO QUE NO APLIQUE. PEEEEEEEROOOOOOO, ANTES DE ELIMINAR ALGO, PIENSA SI APLICA O NO.
 
